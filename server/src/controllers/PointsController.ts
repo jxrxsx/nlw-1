@@ -2,6 +2,14 @@ import knex from "../database/connection";
 import { Request, Response } from "express";
 
 class PointsController {
+
+  async listAll(request: Request, response: Response) {
+
+    const points = await knex('points').select('*');
+
+      return response.json(points);
+  }
+
   async index(request: Request, response: Response) {
     const { city, uf, items } = request.query;
 
@@ -38,6 +46,8 @@ class PointsController {
   }
 
   async create(request: Request, response: Response) {
+    console.log(request.body);
+
     const {
       name,
       email,
